@@ -1,0 +1,50 @@
+Sub CreateEconomicGrowthPresentation()
+    Dim pptApp As Object
+    Dim pptPres As Object
+    Dim slideIndex As Integer
+
+    ' Создаем новое приложение PowerPoint
+    Set pptApp = CreateObject("PowerPoint.Application")
+    pptApp.Visible = True
+
+    ' Создаем новую презентацию
+    Set pptPres = pptApp.Presentations.Add
+
+    ' Слайды
+    Dim titles As Variant
+    Dim contents As Variant
+    
+    titles = Array( _
+        "Rivojlanayotgan mamlakatlarda iqtisodiy oʻsishni cheklovchi muammolar", _
+        "1. Siyosiy beqarorlik", _
+        "2. Korruptsiya", _
+        "3. Ta'lim va malaka yetishmasligi", _
+        "4. Infratuzilma muammolari", _
+        "5. Sanoatning rivojlanmasligi", _
+        "6. Investitsiya yetishmovchiligi", _
+        "7. Tashqi qarz va iqtisodiy qiyinchiliklar" _
+    )
+
+    contents = Array( _
+        "Ushbu taqdimotda rivojlanayotgan mamlakatlarda iqtisodiy oʻsishga ta'sir qiluvchi asosiy muammolar ko'rib chiqiladi.", _
+        "Siyosiy beqarorlik iqtisodiy o'sishga salbiy ta'sir qiladi, investorlarni jalb qilishda qiyinchiliklar yuzaga keladi.", _
+        "Korruptsiya iqtisodiy resurslarning samarasiz taqsimlanishiga olib keladi va ijtimoiy adolatsizlikni kuchaytiradi.", _
+        "Ta'lim va malaka yetishmasligi ishchi kuchining sifatini pasaytiradi, bu esa ishlab chiqarishni sekinlashtiradi.", _
+        "Infratuzilma muammolari transport va kommunikatsiya tizimlarining samarali ishlamasiga olib keladi.", _
+        "Sanoatning rivojlanmasligi iqtisodiy diversifikatsiyalashuvni cheklaydi va qishloq xo'jaligiga bog'liqlikni oshiradi.", _
+        "Investitsiya yetishmovchiligi innovatsiyalarni cheklaydi va iqtisodiy o'sishni pasaytiradi.", _
+        "Tashqi qarz va iqtisodiy qiyinchiliklar rivojlanayotgan mamlakatlarda barqarorlikni tahdid qiladi." _
+    )
+
+    ' Добавляем слайды с заголовками и текстом
+    For slideIndex = LBound(titles) To UBound(titles)
+        With pptPres.Slides.Add(slideIndex + 1, ppLayoutText)
+            .Shapes(1).TextFrame.TextRange.Text = titles(slideIndex)
+            .Shapes(2).TextFrame.TextRange.Text = contents(slideIndex)
+        End With
+    Next slideIndex
+
+    ' Освобождаем память
+    Set pptPres = Nothing
+    Set pptApp = Nothing
+End Sub
